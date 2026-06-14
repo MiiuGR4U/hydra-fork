@@ -14,9 +14,7 @@ export enum Downloader {
   AllDebrid = 13,
   Buffdrive = 14,
   Gofilecdn = 15,
-  Doodrive = 16,
   Buzzheavier = 17,
-  OneFichier = 18,
 }
 
 export enum DownloadSourceStatus {

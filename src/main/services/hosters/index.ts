@@ -7,8 +7,6 @@ export * from "./vikingfile";
 export * from "./rootz";
 export * from "./buffdrive";
 export * from "./gofilecdn";
-export * from "./doodrive";
 export * from "./buzzheavier";
-export * from "./onefichier";
 
 

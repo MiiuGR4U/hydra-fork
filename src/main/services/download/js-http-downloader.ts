@@ -3,6 +3,7 @@ import path from "node:path";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import { logger } from "../logger";
+import { net } from "electron";
 
 export interface JsHttpDownloaderStatus {
   folderName: string;
@@ -372,7 +373,7 @@ export class JsHttpDownloader {
     savePath: string,
     usedFallback: boolean
   ): Promise<void> {
-    const response = await fetch(url, {
+    const response = await net.fetch(url, {
       headers: requestHeaders,
       signal: this.abortController?.signal,
     });
