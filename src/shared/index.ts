@@ -134,6 +134,8 @@ export const getDownloadersForUri = (uri: string) => {
   if (uri.startsWith("https://gofilecdn.eu.cc")) return [Downloader.Gofilecdn];
   if (uri.startsWith("https://buffdrive.com") || uri.startsWith("https://www.buffdrive.com"))
     return [Downloader.Buffdrive];
+  if (uri.startsWith("https://doodrive.com") || uri.startsWith("https://www.doodrive.com"))
+    return [Downloader.Doodrive];
 
   if (uri.startsWith("https://pixeldrain.com")) return [Downloader.PixelDrain];
   if (uri.startsWith("https://datanodes.to")) return [Downloader.Datanodes];
