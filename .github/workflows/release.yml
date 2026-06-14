@@ -52,6 +52,8 @@ jobs:
           MAIN_VITE_CHECKOUT_URL: https://checkout.hydralauncher.gg
           MAIN_VITE_WS_URL: wss://ws.hydralauncher.gg
           MAIN_VITE_LAUNCHER_SUBDOMAIN: launcher
+          MAIN_VITE_EXTERNAL_RESOURCES_URL: https://assets.hydralauncher.gg
+          RENDERER_VITE_EXTERNAL_RESOURCES_URL: https://assets.hydralauncher.gg
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           RENDERER_VITE_SENTRY_DSN: ${{ vars.SENTRY_DSN }}
