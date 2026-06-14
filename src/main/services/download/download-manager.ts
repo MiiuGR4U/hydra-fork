@@ -13,6 +13,8 @@ import {
   BuffdriveApi,
   GofilecdnApi,
   DoodriveApi,
+  BuzzheavierApi,
+  OneFichierApi,
 } from "../hosters";
 import { PythonRPC } from "../python-rpc";
 import {
@@ -990,6 +992,10 @@ export class DownloadManager {
         return this.getGofilecdnDownloadOptions(download, resumingFilename);
       case Downloader.Doodrive:
         return this.getDoodriveDownloadOptions(download, resumingFilename);
+      case Downloader.Buzzheavier:
+        return this.getBuzzheavierDownloadOptions(download, resumingFilename);
+      case Downloader.OneFichier:
+        return this.getOneFichierDownloadOptions(download, resumingFilename);
       default:
         return null;
     }
@@ -1369,6 +1375,40 @@ export class DownloadManager {
     );
   }
 
+  private static async getBuzzheavierDownloadOptions(
+    download: Download,
+    resumingFilename?: string
+  ) {
+    const downloadUrl = await BuzzheavierApi.getDownloadUrl(download.uri);
+    const filename = this.resolveFilename(
+      resumingFilename,
+      download.uri,
+      downloadUrl
+    );
+    return this.buildDownloadOptions(
+      downloadUrl,
+      download.downloadPath,
+      filename
+    );
+  }
+
+  private static async getOneFichierDownloadOptions(
+    download: Download,
+    resumingFilename?: string
+  ) {
+    const downloadUrl = await OneFichierApi.getDownloadUrl(download.uri);
+    const filename = this.resolveFilename(
+      resumingFilename,
+      download.uri,
+      downloadUrl
+    );
+    return this.buildDownloadOptions(
+      downloadUrl,
+      download.downloadPath,
+      filename
+    );
+  }
+
   private static async getDownloadPayload(download: Download) {
     const downloadId = levelKeys.game(download.shop, download.objectId);
 
@@ -1562,6 +1602,24 @@ export class DownloadManager {
       }
       case Downloader.Doodrive: {
         const downloadUrl = await DoodriveApi.getDownloadUrl(download.uri);
+        return {
+          action: "start",
+          game_id: downloadId,
+          url: downloadUrl,
+          save_path: download.downloadPath,
+        };
+      }
+      case Downloader.Buzzheavier: {
+        const downloadUrl = await BuzzheavierApi.getDownloadUrl(download.uri);
+        return {
+          action: "start",
+          game_id: downloadId,
+          url: downloadUrl,
+          save_path: download.downloadPath,
+        };
+      }
+      case Downloader.OneFichier: {
+        const downloadUrl = await OneFichierApi.getDownloadUrl(download.uri);
         return {
           action: "start",
           game_id: downloadId,

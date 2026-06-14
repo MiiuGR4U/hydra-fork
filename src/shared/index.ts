@@ -136,6 +136,10 @@ export const getDownloadersForUri = (uri: string) => {
     return [Downloader.Buffdrive];
   if (uri.startsWith("https://doodrive.com") || uri.startsWith("https://www.doodrive.com"))
     return [Downloader.Doodrive];
+  if (uri.startsWith("https://buzzheavier.com") || uri.startsWith("https://www.buzzheavier.com") || uri.startsWith("https://bzzhr.to"))
+    return [Downloader.Buzzheavier];
+  if (uri.startsWith("https://1fichier.com"))
+    return [Downloader.OneFichier, Downloader.RealDebrid];
 
   if (uri.startsWith("https://pixeldrain.com")) return [Downloader.PixelDrain];
   if (uri.startsWith("https://datanodes.to")) return [Downloader.Datanodes];
