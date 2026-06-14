@@ -60,6 +60,10 @@ jobs:
           RENDERER_VITE_REAL_DEBRID_REFERRAL_ID: ${{ vars.RENDERER_VITE_REAL_DEBRID_REFERRAL_ID }}
           RENDERER_VITE_TORBOX_REFERRAL_CODE: ${{ vars.RENDERER_VITE_TORBOX_REFERRAL_CODE }}
 
+      - name: Get version from package.json
+        id: package-version
+        run: node -e "const fs = require('fs'); const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8')); fs.appendFileSync(process.env.GITHUB_OUTPUT, 'version=' + pkg.version + '\n');"
+
       - name: Create artifact
         uses: actions/upload-artifact@v4
         with:
@@ -71,6 +75,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           draft: false
+          tag_name: v${{ steps.package-version.outputs.version }}-b${{ github.run_number }}
+          name: Release v${{ steps.package-version.outputs.version }} (Build #${{ github.run_number }})
           files: |
             dist/*-portable.exe
         env:
