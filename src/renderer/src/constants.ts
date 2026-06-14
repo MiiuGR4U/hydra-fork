@@ -14,6 +14,8 @@ export const DOWNLOADER_NAME = {
   [Downloader.Rootz]: "Rootz",
   [Downloader.Premiumize]: "Premiumize",
   [Downloader.AllDebrid]: "AllDebrid",
+  [Downloader.Buffdrive]: "Buffdrive",
+  [Downloader.Gofilecdn]: "Gofilecdn",
 };
 
 export const MAX_MINUTES_TO_SHOW_IN_PLAYTIME = 120;
